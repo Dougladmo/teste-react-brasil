@@ -17,9 +17,9 @@ export function Header({ onOpenCarrinho }: HeaderProps) {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            FutureShop
+            Brechó
           </h1>
-          <p className="text-sm text-gray-600">E-commerce do Futuro</p>
+          <p className="text-sm text-gray-600">Brechó Online</p>
         </div>
 
         <div className="flex items-center gap-4">

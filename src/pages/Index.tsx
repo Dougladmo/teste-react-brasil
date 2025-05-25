@@ -32,7 +32,7 @@ const Index = () => {
             Produtos em Destaque
           </h2>
           <p className="text-gray-600 text-lg">
-            Descubra nossa seleção exclusiva de produtos com tecnologia futurista
+            Descubra tesouros únicos e produtos de segunda mão em nosso brechó online
           </p>
         </div>
 

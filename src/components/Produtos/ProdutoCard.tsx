@@ -26,11 +26,34 @@ export function ProdutoCard({ produto }: ProdutoCardProps) {
     }).format(preco);
   };
 
+  // Mapear categorias para as imagens corretas
+  const getImagemProduto = (categoria: string) => {
+    switch (categoria) {
+      case 'Eletrônicos':
+        if (produto.nome.toLowerCase().includes('fone') || produto.nome.toLowerCase().includes('headphone')) {
+          return '/lovable-uploads/7f0c4178-d172-48ab-be1e-25bab1e66728.png';
+        } else if (produto.nome.toLowerCase().includes('notebook') || produto.nome.toLowerCase().includes('laptop')) {
+          return '/lovable-uploads/5a327de5-fa0c-48ae-830b-1c1e56635eb1.png';
+        }
+        break;
+      case 'Roupas':
+        if (produto.nome.toLowerCase().includes('camisa') || produto.nome.toLowerCase().includes('camiseta')) {
+          return '/lovable-uploads/13a03f1f-f284-4591-88e0-04aaffe886fa.png';
+        }
+        break;
+      case 'Livros':
+        return '/lovable-uploads/b4fb352e-d7b0-48dd-8f70-83abeb81a8e9.png';
+      default:
+        return produto.imagem_url || '/placeholder.svg';
+    }
+    return produto.imagem_url || '/placeholder.svg';
+  };
+
   return (
     <div className="bg-white/70 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-cy="produto-card">
       <div className="aspect-square overflow-hidden">
         <img
-          src={produto.imagem_url || '/placeholder.svg'}
+          src={getImagemProduto(produto.categoria)}
           alt={produto.nome}
           className="w-full h-full object-cover"
           data-cy="produto-imagem"

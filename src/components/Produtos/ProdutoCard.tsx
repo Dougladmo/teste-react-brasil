@@ -26,18 +26,18 @@ export function ProdutoCard({ produto }: ProdutoCardProps) {
     }).format(preco);
   };
 
-  // Mapear categorias para as imagens corretas
-  const getImagemProduto = (categoria: string) => {
+  // Mapear categorias para as imagens enviadas pelo usuário
+  const getImagemProduto = (categoria: string, nome: string) => {
     switch (categoria) {
       case 'Eletrônicos':
-        if (produto.nome.toLowerCase().includes('fone') || produto.nome.toLowerCase().includes('headphone')) {
+        if (nome.toLowerCase().includes('fone') || nome.toLowerCase().includes('headphone') || nome.toLowerCase().includes('bluetooth')) {
           return '/lovable-uploads/7f0c4178-d172-48ab-be1e-25bab1e66728.png';
-        } else if (produto.nome.toLowerCase().includes('notebook') || produto.nome.toLowerCase().includes('laptop')) {
+        } else if (nome.toLowerCase().includes('notebook') || nome.toLowerCase().includes('laptop')) {
           return '/lovable-uploads/5a327de5-fa0c-48ae-830b-1c1e56635eb1.png';
         }
         break;
       case 'Roupas':
-        if (produto.nome.toLowerCase().includes('camisa') || produto.nome.toLowerCase().includes('camiseta')) {
+        if (nome.toLowerCase().includes('camisa') || nome.toLowerCase().includes('camiseta')) {
           return '/lovable-uploads/13a03f1f-f284-4591-88e0-04aaffe886fa.png';
         }
         break;
@@ -53,7 +53,7 @@ export function ProdutoCard({ produto }: ProdutoCardProps) {
     <div className="bg-white/70 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-cy="produto-card">
       <div className="aspect-square overflow-hidden">
         <img
-          src={getImagemProduto(produto.categoria)}
+          src={getImagemProduto(produto.categoria, produto.nome)}
           alt={produto.nome}
           className="w-full h-full object-cover"
           data-cy="produto-imagem"

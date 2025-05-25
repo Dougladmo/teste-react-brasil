@@ -32,7 +32,7 @@ const Index = () => {
             Produtos em Destaque
           </h2>
           <p className="text-gray-600 text-lg">
-            Descubra tesouros únicos e produtos de segunda mão em nosso brechó online
+            Encontre tesouros únicos e produtos especiais no Garimpo
           </p>
         </div>
 

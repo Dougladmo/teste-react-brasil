@@ -26,23 +26,30 @@ export function ProdutoCard({ produto }: ProdutoCardProps) {
     }).format(preco);
   };
 
-  // Mapear categorias para as imagens enviadas pelo usuário
+  // Mapear categorias para as novas imagens enviadas pelo usuário
   const getImagemProduto = (categoria: string, nome: string) => {
     switch (categoria) {
       case 'Eletrônicos':
         if (nome.toLowerCase().includes('fone') || nome.toLowerCase().includes('headphone') || nome.toLowerCase().includes('bluetooth')) {
-          return '/lovable-uploads/7f0c4178-d172-48ab-be1e-25bab1e66728.png';
+          return '/lovable-uploads/d8162ae9-c55f-448f-a892-058c0977b9a0.png'; // Headphone/Fone
         } else if (nome.toLowerCase().includes('notebook') || nome.toLowerCase().includes('laptop')) {
-          return '/lovable-uploads/5a327de5-fa0c-48ae-830b-1c1e56635eb1.png';
+          return '/lovable-uploads/d65556d4-aa3f-4927-b55d-8eb4733a68d5.png'; // Notebook
+        } else if (nome.toLowerCase().includes('celular') || nome.toLowerCase().includes('smartphone') || nome.toLowerCase().includes('iphone')) {
+          return '/lovable-uploads/9a4563cb-fa92-4572-951a-8e92d501565c.png'; // Celular com tela quebrada
         }
         break;
       case 'Roupas':
         if (nome.toLowerCase().includes('camisa') || nome.toLowerCase().includes('camiseta')) {
-          return '/lovable-uploads/13a03f1f-f284-4591-88e0-04aaffe886fa.png';
+          return '/lovable-uploads/6a386e6a-4772-4b74-a548-f82e8d843180.png'; // Camiseta
+        }
+        break;
+      case 'Calçados':
+        if (nome.toLowerCase().includes('tênis') || nome.toLowerCase().includes('chuteira') || nome.toLowerCase().includes('sapato')) {
+          return '/lovable-uploads/6fc4ec07-5d33-427c-a133-12d1d92ea9f8.png'; // Tênis/Chuteira
         }
         break;
       case 'Livros':
-        return '/lovable-uploads/b4fb352e-d7b0-48dd-8f70-83abeb81a8e9.png';
+        return '/lovable-uploads/9d228fb6-8a82-4881-b6ed-57781b59e346.png'; // Livro Lula
       default:
         return produto.imagem_url || '/placeholder.svg';
     }

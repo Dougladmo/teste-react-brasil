@@ -4,12 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useCarrinho } from '@/hooks/useCarrinho';
 import { useAuth } from '@/hooks/useAuth';
-import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
-import { X, CreditCard, Banknote, Smartphone } from 'lucide-react';
+import { X, CreditCard, QrCode } from 'lucide-react';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -33,10 +31,6 @@ export function CheckoutModal({ isOpen, onClose, total, itens }: CheckoutModalPr
     validade: '',
     cvv: '',
   });
-  const [dadosPix, setDadosPix] = useState({
-    chave: '',
-    tipo: '',
-  });
   const [loading, setLoading] = useState(false);
   const { limparCarrinho } = useCarrinho();
   const { user } = useAuth();
@@ -47,6 +41,9 @@ export function CheckoutModal({ isOpen, onClose, total, itens }: CheckoutModalPr
 
     setLoading(true);
     try {
+      // Simular processamento de pagamento
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
       // Simular criação de pedido para testes
       const pedidoId = 'pedido-' + Date.now();
       
@@ -81,9 +78,8 @@ export function CheckoutModal({ isOpen, onClose, total, itens }: CheckoutModalPr
   const isFormValid = () => {
     const enderecoValido = endereco.rua && endereco.numero && endereco.bairro && endereco.cidade && endereco.cep;
     const pagamentoValido = formaPagamento && (
-      formaPagamento === 'dinheiro' ||
-      (formaPagamento === 'cartao' && dadosCartao.numero && dadosCartao.nome && dadosCartao.validade && dadosCartao.cvv) ||
-      (formaPagamento === 'pix' && dadosPix.chave && dadosPix.tipo)
+      formaPagamento === 'pix' ||
+      (formaPagamento === 'cartao' && dadosCartao.numero && dadosCartao.nome && dadosCartao.validade && dadosCartao.cvv)
     );
     return enderecoValido && pagamentoValido;
   };
@@ -185,16 +181,8 @@ export function CheckoutModal({ isOpen, onClose, total, itens }: CheckoutModalPr
               <div className="flex items-center space-x-2 p-4 border border-cinza-sujo/30 rounded-lg hover:bg-bege-po/30">
                 <RadioGroupItem value="pix" id="pix" />
                 <Label htmlFor="pix" className="flex items-center gap-2 cursor-pointer text-marrom-cafezinho font-medium">
-                  <Smartphone className="w-5 h-5" />
+                  <QrCode className="w-5 h-5" />
                   PIX
-                </Label>
-              </div>
-              
-              <div className="flex items-center space-x-2 p-4 border border-cinza-sujo/30 rounded-lg hover:bg-bege-po/30">
-                <RadioGroupItem value="dinheiro" id="dinheiro" />
-                <Label htmlFor="dinheiro" className="flex items-center gap-2 cursor-pointer text-marrom-cafezinho font-medium">
-                  <Banknote className="w-5 h-5" />
-                  Dinheiro (Entrega)
                 </Label>
               </div>
             </RadioGroup>
@@ -203,6 +191,7 @@ export function CheckoutModal({ isOpen, onClose, total, itens }: CheckoutModalPr
             {formaPagamento === 'cartao' && (
               <div className="space-y-4 p-4 bg-bege-po/50 rounded-lg">
                 <h4 className="font-medium text-marrom-cafezinho">Dados do Cartão</h4>
+                <p className="text-sm text-marrom-cafezinho/70">Para testes, você pode usar qualquer número de cartão</p>
                 
                 <div>
                   <Label htmlFor="numero-cartao" className="text-marrom-cafezinho font-medium">Número do Cartão</Label>
@@ -255,37 +244,37 @@ export function CheckoutModal({ isOpen, onClose, total, itens }: CheckoutModalPr
               </div>
             )}
 
-            {/* Dados do PIX */}
+            {/* QR Code do PIX */}
             {formaPagamento === 'pix' && (
               <div className="space-y-4 p-4 bg-bege-po/50 rounded-lg">
-                <h4 className="font-medium text-marrom-cafezinho">Dados do PIX</h4>
+                <h4 className="font-medium text-marrom-cafezinho">Pagamento PIX</h4>
+                <p className="text-sm text-marrom-cafezinho/70">Escaneie o QR Code abaixo para realizar o pagamento</p>
                 
-                <div>
-                  <Label htmlFor="tipo-chave" className="text-marrom-cafezinho font-medium">Tipo de Chave PIX</Label>
-                  <Select value={dadosPix.tipo} onValueChange={(value) => setDadosPix({...dadosPix, tipo: value})}>
-                    <SelectTrigger className="border-cinza-sujo/30 mt-1">
-                      <SelectValue placeholder="Selecione o tipo de chave" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="cpf">CPF</SelectItem>
-                      <SelectItem value="email">E-mail</SelectItem>
-                      <SelectItem value="telefone">Telefone</SelectItem>
-                      <SelectItem value="aleatoria">Chave Aleatória</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div>
-                  <Label htmlFor="chave-pix" className="text-marrom-cafezinho font-medium">Chave PIX</Label>
-                  <Input
-                    id="chave-pix"
-                    placeholder="Digite sua chave PIX"
-                    value={dadosPix.chave}
-                    onChange={(e) => setDadosPix({...dadosPix, chave: e.target.value})}
-                    required={formaPagamento === 'pix'}
-                    className="border-cinza-sujo/30 mt-1"
-                    data-cy="chave-pix"
-                  />
+                <div className="flex flex-col items-center space-y-4">
+                  <div className="w-48 h-48 bg-white border-2 border-cinza-sujo/30 rounded-lg flex items-center justify-center">
+                    <div className="w-40 h-40 bg-black/10 rounded-lg flex items-center justify-center">
+                      <QrCode className="w-32 h-32 text-marrom-cafezinho/60" />
+                    </div>
+                  </div>
+                  
+                  <div className="text-center">
+                    <p className="text-sm font-medium text-marrom-cafezinho">Valor: {formatarPreco(total)}</p>
+                    <p className="text-xs text-marrom-cafezinho/70 mt-1">
+                      QR Code de demonstração para testes
+                    </p>
+                  </div>
+                  
+                  <div className="w-full">
+                    <Label className="text-marrom-cafezinho font-medium">Código PIX Copia e Cola</Label>
+                    <div className="mt-1 p-3 bg-white border border-cinza-sujo/30 rounded-md">
+                      <p className="text-xs font-mono text-marrom-cafezinho break-all">
+                        00020126330014BR.GOV.BCB.PIX0111123456789015204000053039865802BR5913GARIMPO TESTE6008BRASILIA62070503***6304DEMO
+                      </p>
+                    </div>
+                    <p className="text-xs text-marrom-cafezinho/70 mt-1">
+                      Código de demonstração para testes
+                    </p>
+                  </div>
                 </div>
               </div>
             )}

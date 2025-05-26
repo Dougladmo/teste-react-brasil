@@ -23,8 +23,6 @@ const Index = () => {
     return <AuthPage />;
   }
 
-  console.log('Usuário autenticado:', user.email);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-marrom-cafezinho via-cinza-sujo to-bege-po">
       <Header onOpenCarrinho={() => setCarrinhoAberto(true)} />

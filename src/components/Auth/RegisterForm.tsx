@@ -15,14 +15,13 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signUp } = useAuth();
-  const handleSubmit = async (e: React.FormEvent) => {
+  const { signUp } = useAuth();  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);    try {
       await signUp(email, password, nome);
       toast({
-        title: "Sucesso",
-        description: "Conta criada com sucesso! Você já pode fazer login.",
+        title: "Conta criada com sucesso!",
+        description: "Agora você pode fazer login com suas credenciais.",
       });
       
       // Limpar formulário após sucesso
@@ -30,10 +29,10 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
       setEmail('');
       setPassword('');
       
-      // Mudar para tela de login após 2 segundos
+      // Mudar para tela de login imediatamente
       setTimeout(() => {
         onToggleMode();
-      }, 2000);
+      }, 1500);
       
     } catch (error: any) {
       toast({

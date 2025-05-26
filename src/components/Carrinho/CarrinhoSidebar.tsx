@@ -29,11 +29,11 @@ export function CarrinhoSidebar({ isOpen, onClose }: CarrinhoSidebarProps) {
       <div className="fixed right-0 top-0 h-full w-96 bg-marrom-cafezinho shadow-2xl z-50 transform transition-transform" data-cy="carrinho-sidebar">
         <div className="p-6 border-b border-cinza-sujo/30">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold flex items-center gap-2 text-off-white-envelhecido">
+            <h2 className="text-xl font-bold flex items-center gap-2 text-marrom-cafezinho">
               <ShoppingBag className="w-6 h-6" />
               Carrinho
             </h2>
-            <Button variant="ghost" size="sm" onClick={onClose} className="text-off-white-envelhecido hover:bg-bege-po hover:text-marrom-cafezinho" data-cy="fechar-carrinho">
+            <Button variant="ghost" size="sm" onClick={onClose} className="text-marrom-cafezinho hover:bg-bege-po hover:text-marrom-cafezinho" data-cy="fechar-carrinho">
               <X className="w-5 h-5" />
             </Button>
           </div>

@@ -17,7 +17,7 @@ export function Header({ onOpenCarrinho }: HeaderProps) {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-terracota-queimado">
-            Garimpo
+            Brechó Pé-de-Chinelo
           </h1>
           <p className="text-sm text-off-white-envelhecido/80">Tesouros Únicos</p>
         </div>

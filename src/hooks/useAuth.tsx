@@ -45,19 +45,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       password,
     });
     if (error) throw error;
-  };
-
-  const signUp = async (email: string, password: string, nome: string) => {
-    const { error } = await supabase.auth.signUp({
+  };  const signUp = async (email: string, password: string, nome: string) => {
+    // Tentativa de registro sem verificação de email
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
           nome: nome,
         },
+        emailRedirectTo: undefined,
       },
     });
+    
     if (error) throw error;
+    
+    // Se o usuário foi criado mas não confirmado automaticamente,
+    // tenta fazer login direto (para ambientes de desenvolvimento)
+    if (data.user && !data.session) {
+      console.log('Usuário criado, tentando login automático...');
+      try {
+        await signIn(email, password);
+      } catch (loginError) {
+        console.log('Login automático falhou, usuário precisará fazer login manualmente');
+        // Não jogar erro aqui, pois o usuário foi criado com sucesso
+      }
+    }
   };
 
   const signOut = async () => {

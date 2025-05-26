@@ -3,8 +3,8 @@ describe('TC03 - Teste de Checkout Completo (Automatizado)', () => {
   beforeEach(() => {
     // Login
     cy.visit('/')
-    cy.get('[data-cy="login-email"]').type('standard_user@teste.com')
-    cy.get('[data-cy="login-password"]').type('secret_sauce')
+    cy.get('[data-cy="login-email"]').type('carlos07victor@gmail.com')
+    cy.get('[data-cy="login-password"]').type('123456')
     cy.get('[data-cy="login-submit"]').click()
     cy.get('[data-cy="lista-produtos"]').should('be.visible')
   })

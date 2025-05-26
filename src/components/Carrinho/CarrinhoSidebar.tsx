@@ -11,7 +11,7 @@ interface CarrinhoSidebarProps {
 }
 
 export function CarrinhoSidebar({ isOpen, onClose }: CarrinhoSidebarProps) {
-  const { itens, total, removerItem, atualizarQuantidade } = useCarrinho();
+  const { itens, total, removerItem, atualizarQuantidade, loading } = useCarrinho();
   const [showCheckout, setShowCheckout] = useState(false);
 
   const formatarPreco = (preco: number) => {
@@ -37,10 +37,13 @@ export function CarrinhoSidebar({ isOpen, onClose }: CarrinhoSidebarProps) {
               <X className="w-5 h-5" />
             </Button>
           </div>
-        </div>
-
-        <div className="flex-1 overflow-y-auto p-6">
-          {itens.length === 0 ? (
+        </div>        <div className="flex-1 overflow-y-auto p-6">
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="animate-spin w-8 h-8 border-2 border-terracota-queimado border-t-transparent rounded-full mx-auto mb-4"></div>
+              <p className="text-off-white-envelhecido/80">Carregando carrinho...</p>
+            </div>
+          ) : itens.length === 0 ? (
             <div className="text-center py-12">
               <ShoppingBag className="w-16 h-16 mx-auto text-cinza-sujo mb-4" />
               <p className="text-off-white-envelhecido/80">Seu carrinho está vazio</p>

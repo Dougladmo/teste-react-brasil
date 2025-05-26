@@ -74,7 +74,7 @@ export function CarrinhoSidebar({ isOpen, onClose }: CarrinhoSidebarProps) {
                         variant="outline"
                         size="sm"
                         onClick={() => atualizarQuantidade(item.id, item.quantidade + 1)}
-                        className="border-cinza-sujo text-off-white-envelhecido hover:bg-bege-po hover:text-marrom-cafezinho"
+                        className="border-cinza-sujo text-marrom-cafezinho hover:bg-bege-po hover:text-marrom-cafezinho"
                         data-cy="aumentar-quantidade"
                       >
                         <Plus className="w-3 h-3" />

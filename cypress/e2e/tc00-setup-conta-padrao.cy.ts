@@ -16,9 +16,8 @@ describe('TC00 - Setup Conta Padrão', () => {
       } else {
         // Conta não existe, vamos criar
         cy.log('📝 Criando conta padrão teste@teste.com');
-        
-        // Ir para tela de registro
-        cy.get('[data-cy="register-link"]').click();
+          // Ir para tela de registro
+        cy.get('[data-cy="toggle-to-register"]').click();
         cy.get('[data-cy="register-form"]').should('be.visible');
         
         // Criar conta padrão

@@ -13,10 +13,9 @@ describe('TC01 - Login Válido (Automatizado)', () => {
     
     // Clicar no botão de login
     cy.get('[data-cy="login-submit"]').click()
-    
-    // Verificar redirecionamento para página de produtos
+      // Verificar redirecionamento para página de produtos
     cy.get('[data-cy="lista-produtos"]').should('be.visible')
-    cy.get('[data-cy="user-name"]').should('contain', 'teste@teste.com')
+    cy.get('[data-cy="user-name"]').should('contain', 'teste') // Nome do usuário
     
     // Verificar se o header está visível
     cy.contains('Garimpo').should('be.visible')
@@ -37,9 +36,8 @@ describe('TC01 - Login Válido (Automatizado)', () => {
   it('Deve realizar login usando comando customizado', () => {
     // Usando o comando customizado com credenciais padrão
     cy.login()
-    
-    // Verificar que login foi bem-sucedido
+      // Verificar que login foi bem-sucedido
     cy.get('[data-cy="lista-produtos"]').should('be.visible')
-    cy.get('[data-cy="user-name"]').should('contain', 'teste@teste.com')
+    cy.get('[data-cy="user-name"]').should('contain', 'teste') // Nome do usuário
   })
 })

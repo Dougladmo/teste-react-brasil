@@ -172,7 +172,7 @@ Para que os testes funcionem, os seguintes `data-cy` attributes devem estar pres
 - `[data-cy="login-email"]`
 - `[data-cy="login-password"]`
 - `[data-cy="login-submit"]`
-- `[data-cy="register-link"]`
+- `[data-cy="toggle-to-register"]`
 - `[data-cy="register-form"]`
 - `[data-cy="register-name"]`
 - `[data-cy="register-email"]`

@@ -20,12 +20,11 @@ declare namespace Cypress {
      * @example cy.logout()
      */
     logout(): Chainable<Element>;
-    
-    /**
+      /**
      * Custom command to register a new user
-     * @example cy.registerUser('New User', 'new@test.com', 'password', 'password')
+     * @example cy.registerUser('New User', 'new@test.com', 'password')
      */
-    registerUser(name: string, email: string, password: string, confirmPassword: string): Chainable<Element>;
+    registerUser(name: string, email: string, password: string, confirmPassword?: string): Chainable<Element>;
     
     /**
      * Custom command to select a category
@@ -112,18 +111,19 @@ Cypress.Commands.add('logout', () => {
 });
 
 // Register user command
-Cypress.Commands.add('registerUser', (name: string, email: string, password: string, confirmPassword: string) => {
+Cypress.Commands.add('registerUser', (name: string, email: string, password: string, confirmPassword?: string) => {
   cy.visit('/');
-  cy.get('[data-cy="register-link"]').click();
+  cy.get('[data-cy="toggle-to-register"]').click();
   cy.get('[data-cy="register-form"]').should('be.visible');
   cy.get('[data-cy="register-name"]').clear().type(name);
   cy.get('[data-cy="register-email"]').clear().type(email);
   cy.get('[data-cy="register-password"]').clear().type(password);
-  cy.get('[data-cy="register-confirm-password"]').clear().type(confirmPassword);
+  // Nota: RegisterForm não tem campo de confirmação de senha
   cy.get('[data-cy="register-submit"]').click();
   
   // Wait for success message and redirect to login
-  cy.contains('Cadastro realizado com sucesso').should('be.visible');
+  cy.contains('Conta criada com sucesso!').should('be.visible');
+  cy.wait(2000); // Wait for automatic redirect
   cy.get('[data-cy="login-form"]').should('be.visible');
 });
 

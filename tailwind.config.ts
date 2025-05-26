@@ -20,12 +20,12 @@ export default {
 		},
 		extend: {
 			colors: {
-				// Paleta Urbano Desgastado
-				'verde-milicia': '#5B665E',
-				'azul-denim': '#708090',
-				'amarelo-mostarda': '#D4A017',
-				'laranja-sinalizacao': '#E07A5F',
-				'cinza-concreto': '#8C8C8C',
+				// Paleta Terracota & Poeira
+				'terracota-queimado': '#CC7351',
+				'marrom-cafezinho': '#6B4F3A',
+				'bege-po': '#D8C3A5',
+				'cinza-sujo': '#A39E93',
+				'off-white-envelhecido': '#F2ECE4',
 				
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',

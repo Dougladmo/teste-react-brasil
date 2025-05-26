@@ -33,12 +33,12 @@ export function Header({ onOpenCarrinho }: HeaderProps) {
           <Button
             variant="outline"
             onClick={onOpenCarrinho}
-            className="relative border-cinza-sujo text-off-white-envelhecido hover:bg-bege-po hover:text-marrom-cafezinho"
+            className="relative border-cinza-sujo text-marrom-cafezinho hover:bg-bege-po hover:text-marrom-cafezinho"
             data-cy="abrir-carrinho"
           >
             <ShoppingCart className="w-5 h-5" />
             {quantidadeTotal > 0 && (
-              <span className="absolute -top-2 -right-2 bg-terracota-queimado text-off-white-envelhecido text-xs rounded-full w-5 h-5 flex items-center justify-center" data-cy="carrinho-contador">
+              <span className="absolute -top-2 -right-2 bg-terracota-queimado text-marrom-cafezinho text-xs rounded-full w-5 h-5 flex items-center justify-center" data-cy="carrinho-contador">
                 {quantidadeTotal}
               </span>
             )}
@@ -48,7 +48,7 @@ export function Header({ onOpenCarrinho }: HeaderProps) {
             <Button
               variant="outline"
               onClick={signOut}
-              className="border-cinza-sujo text-off-white-envelhecido hover:bg-bege-po hover:text-marrom-cafezinho"
+              className="border-cinza-sujo text-marrom-cafezinho hover:bg-bege-po hover:text-marrom-cafezinho"
               data-cy="logout-button"
             >
               <LogOut className="w-4 h-4 mr-2" />

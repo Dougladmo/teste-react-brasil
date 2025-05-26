@@ -129,7 +129,16 @@ Cypress.Commands.add('registerUser', (name: string, email: string, password: str
 
 // Select category command
 Cypress.Commands.add('selectCategory', (category: 'Roupas' | 'Eletrônicos' | 'Livros' | 'Todos') => {
-  cy.get('[data-cy="categoria-filter"]').select(category);
+  // Abrir o dropdown de categoria
+  cy.get('[data-cy="filtro-categoria"]').click();
+  
+  // Selecionar a opção baseada na categoria com explicit click
+  if (category === 'Todos') {
+    cy.contains('Todas as categorias').click().click(); // Double click for explicit interaction
+  } else {
+    cy.contains(category).click().click(); // Double click for explicit interaction
+  }
+  
   cy.wait(500); // Wait for filter to apply
 });
 
@@ -139,9 +148,11 @@ Cypress.Commands.add('applyFilter', (filterType: 'name' | 'lowest-price' | 'high
     cy.get('[data-cy="search-input"]').clear().type(searchTerm);
     cy.get('[data-cy="search-button"]').click();
   } else if (filterType === 'lowest-price') {
-    cy.get('[data-cy="sort-filter"]').select('Menor Preço');
+    cy.get('[data-cy="ordenacao-produtos"]').click();
+    cy.contains('Menor preço').click();
   } else if (filterType === 'highest-price') {
-    cy.get('[data-cy="sort-filter"]').select('Maior Preço');
+    cy.get('[data-cy="ordenacao-produtos"]').click();
+    cy.contains('Maior preço').click();
   }
   cy.wait(500); // Wait for filter to apply
 });

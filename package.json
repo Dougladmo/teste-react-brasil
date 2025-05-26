@@ -2,19 +2,21 @@
   "name": "vite_react_shadcn_ts",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
-  "scripts": {
+  "type": "module",  "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
-    "cypress:run:chrome": "cypress run --browser chrome",
+    "cypress:open": "cypress open --config viewportWidth=1920,viewportHeight=1080",
+    "cypress:open:fullscreen": "cypress open --config viewportWidth=1920,viewportHeight=1080 --browser chrome",
+    "cypress:run": "cypress run --config viewportWidth=1920,viewportHeight=1080",
+    "cypress:run:chrome": "cypress run --browser chrome --config viewportWidth=1920,viewportHeight=1080",
     "cypress:run:mobile": "cypress run --config viewportWidth=375,viewportHeight=667",
-    "test:e2e": "start-server-and-test dev http://localhost:8080 cypress:run",
-    "test:e2e:headed": "start-server-and-test dev http://localhost:8080 cypress:open"
+    "cypress:run:headless": "cypress run --headless --config viewportWidth=1920,viewportHeight=1080",
+    "test:e2e": "start-server-and-test dev http://localhost:8082 cypress:run",
+    "test:e2e:headed": "start-server-and-test dev http://localhost:8082 cypress:open:fullscreen",
+    "test:e2e:debug": "start-server-and-test dev http://localhost:8082 cypress:open"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

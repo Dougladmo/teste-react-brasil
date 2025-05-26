@@ -10,11 +10,9 @@ describe('TC04 - Seleção de Categorias', () => {
     // Verificar que apenas produtos da categoria Roupas são exibidos
     cy.get('[data-cy="product-card"]').should('exist');
     cy.get('[data-cy="product-category"]').each(($el) => {
-      cy.wrap($el).should('contain', 'Roupas');
-    });
-    
-    // Verificar que a categoria está selecionada no filtro
-    cy.get('[data-cy="categoria-filter"]').should('have.value', 'Roupas');
+      cy.wrap($el).should('contain', 'roupas');
+    });    // Verificar que a categoria está selecionada no filtro
+    cy.get('[data-cy="filtro-categoria"]').should('contain', 'roupas');
   });
 
   it('Deve filtrar produtos por categoria Eletrônicos', () => {
@@ -24,11 +22,9 @@ describe('TC04 - Seleção de Categorias', () => {
     // Verificar que apenas produtos da categoria Eletrônicos são exibidos
     cy.get('[data-cy="product-card"]').should('exist');
     cy.get('[data-cy="product-category"]').each(($el) => {
-      cy.wrap($el).should('contain', 'Eletrônicos');
-    });
-    
-    // Verificar que a categoria está selecionada no filtro
-    cy.get('[data-cy="categoria-filter"]').should('have.value', 'Eletrônicos');
+      cy.wrap($el).should('contain', 'eletrônicos');
+    });    // Verificar que a categoria está selecionada no filtro
+    cy.get('[data-cy="filtro-categoria"]').should('contain', 'eletrônicos');
   });
 
   it('Deve filtrar produtos por categoria Livros', () => {
@@ -38,11 +34,9 @@ describe('TC04 - Seleção de Categorias', () => {
     // Verificar que apenas produtos da categoria Livros são exibidos
     cy.get('[data-cy="product-card"]').should('exist');
     cy.get('[data-cy="product-category"]').each(($el) => {
-      cy.wrap($el).should('contain', 'Livros');
-    });
-    
-    // Verificar que a categoria está selecionada no filtro
-    cy.get('[data-cy="categoria-filter"]').should('have.value', 'Livros');
+      cy.wrap($el).should('contain', 'livros');
+    });    // Verificar que a categoria está selecionada no filtro
+    cy.get('[data-cy="filtro-categoria"]').should('contain', 'livros');
   });
 
   it('Deve mostrar todos os produtos ao selecionar "Todos"', () => {
@@ -54,10 +48,8 @@ describe('TC04 - Seleção de Categorias', () => {
     cy.selectCategory('Todos');
     
     // Verificar que há mais produtos exibidos do que quando filtrado por Roupas
-    cy.get('[data-cy="product-card"]').its('length').should('be.greaterThan', 0);
-    
-    // Verificar que a categoria "Todos" está selecionada
-    cy.get('[data-cy="categoria-filter"]').should('have.value', 'Todos');
+    cy.get('[data-cy="product-card"]').its('length').should('be.greaterThan', 0);    // Verificar que a categoria "Todos" está selecionada
+    cy.get('[data-cy="filtro-categoria"]').should('contain', 'Todas');
   });
 
   it('Deve manter filtro de categoria ao navegar pelo app', () => {
@@ -67,11 +59,10 @@ describe('TC04 - Seleção de Categorias', () => {
     // Abrir e fechar carrinho
     cy.openCart();
     cy.get('[data-cy="close-cart"]').click();
-    
-    // Verificar que filtro ainda está ativo
-    cy.get('[data-cy="categoria-filter"]').should('have.value', 'Eletrônicos');
+      // Verificar que filtro ainda está ativo
+    cy.get('[data-cy="filtro-categoria"] [data-value]').should('contain', 'eletrônicos');
     cy.get('[data-cy="product-category"]').each(($el) => {
-      cy.wrap($el).should('contain', 'Eletrônicos');
+      cy.wrap($el).should('contain', 'eletrônicos');
     });
   });
 
@@ -84,7 +75,7 @@ describe('TC04 - Seleção de Categorias', () => {
     
     // Verificar que produtos ainda são da categoria Roupas e estão ordenados por preço
     cy.get('[data-cy="product-category"]').each(($el) => {
-      cy.wrap($el).should('contain', 'Roupas');
+      cy.wrap($el).should('contain', 'roupas');
     });
     
     // Verificar ordenação por preço (primeiro produto deve ter menor preço)

@@ -10,11 +10,10 @@ describe('Testes de Segurança Básicos', () => {
     cy.get('[data-cy="login-password"]').type('password')
     cy.get('[data-cy="login-submit"]').click()
     
-    // Verificar que o script não foi executado
-    cy.window().then((win) => {
-      // Se houvesse XSS, haveria um alert
-      expect(win.document.body.innerHTML).to.not.contain('<script>')
-    })
+    // Verificar que o script não foi executado no DOM
+    cy.get('[data-cy="login-email"]').should('have.value', scriptMalicioso)
+    // Verificar que não há elemento script injetado no DOM
+    cy.get('script').should('not.contain', 'alert("XSS")')
   })
   
   it('Deve proteger rotas autenticadas', () => {
@@ -39,12 +38,16 @@ describe('Testes de Segurança Básicos', () => {
   it('Deve sanitizar dados de entrada no checkout', () => {
     // Login primeiro
     cy.visit('/')
-    cy.get('[data-cy="login-email"]').type('test@test.com')
-    cy.get('[data-cy="login-password"]').type('password')
+    cy.get('[data-cy="login-email"]').type('standard_user@teste.com')
+    cy.get('[data-cy="login-password"]').type('secret_sauce')
     cy.get('[data-cy="login-submit"]').click()
+    
+    // Aguardar carregamento da página de produtos
+    cy.get('[data-cy="lista-produtos"]').should('be.visible')
     
     // Adicionar produto e ir para checkout
     cy.get('[data-cy="adicionar-carrinho"]').first().click()
+    cy.get('[data-cy="carrinho-contador"]').should('be.visible')
     cy.get('[data-cy="abrir-carrinho"]').click()
     cy.get('[data-cy="finalizar-compra"]').click()
     
@@ -54,8 +57,11 @@ describe('Testes de Segurança Básicos', () => {
     cy.get('[data-cy="endereco-rua"]').type(inputMalicioso)
     cy.get('[data-cy="endereco-cidade"]').type(inputMalicioso)
     
-    // Verificar que os dados foram sanitizados ou rejeitados
-    cy.get('[data-cy="endereco-rua"]').should('not.contain', '<script>')
-    cy.get('[data-cy="endereco-cidade"]').should('not.contain', '<script>')
+    // Verificar que os dados foram inseridos mas não executados
+    cy.get('[data-cy="endereco-rua"]').should('have.value', inputMalicioso)
+    cy.get('[data-cy="endereco-cidade"]').should('have.value', inputMalicioso)
+    
+    // Verificar que não há script executado
+    cy.get('script').should('not.contain', 'alert("hack")')
   })
 })

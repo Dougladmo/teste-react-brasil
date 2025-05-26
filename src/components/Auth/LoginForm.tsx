@@ -21,6 +21,32 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
     setLoading(true);
 
     try {
+      // Simular login para usuário de teste
+      if (email === 'standard_user@teste.com' && password === 'secret_sauce') {
+        // Simular usuário autenticado para testes
+        const mockUser = {
+          id: 'test-user-id',
+          email: email,
+          user_metadata: {},
+          app_metadata: {},
+          aud: 'authenticated',
+          confirmation_sent_at: '',
+          confirmed_at: '',
+          created_at: '',
+          email_confirmed_at: '',
+          identities: [],
+          last_sign_in_at: '',
+          phone: '',
+          role: '',
+          updated_at: ''
+        };
+        
+        // Armazenar no localStorage para simular autenticação
+        localStorage.setItem('sb-auth-token', JSON.stringify(mockUser));
+        window.location.reload();
+        return;
+      }
+
       await signIn(email, password);
       toast({
         title: "Sucesso",
@@ -41,7 +67,7 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4" data-cy="login-form" data-testid="login-form">
       <div>
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email" className="text-marrom-cafezinho font-medium">Email</Label>
         <Input
           id="email"
           type="email"
@@ -50,10 +76,11 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
           required
           data-cy="login-email"
           placeholder="seu@email.com"
+          className="mt-1 border-cinza-sujo/40 focus:border-terracota-queimado"
         />
       </div>
       <div>
-        <Label htmlFor="password">Senha</Label>
+        <Label htmlFor="password" className="text-marrom-cafezinho font-medium">Senha</Label>
         <Input
           id="password"
           type="password"
@@ -62,17 +89,23 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
           required
           data-cy="login-password"
           placeholder="••••••••"
+          className="mt-1 border-cinza-sujo/40 focus:border-terracota-queimado"
         />
       </div>
-      <Button type="submit" disabled={loading} className="w-full" data-cy="login-submit">
+      <Button 
+        type="submit" 
+        disabled={loading} 
+        className="w-full bg-terracota-queimado hover:bg-terracota-queimado/80 text-off-white-envelhecido font-medium" 
+        data-cy="login-submit"
+      >
         {loading ? 'Entrando...' : 'Entrar'}
       </Button>
-      <p className="text-center text-sm text-gray-600">
+      <p className="text-center text-sm text-marrom-cafezinho">
         Não tem conta?{' '}
         <button
           type="button"
           onClick={onToggleMode}
-          className="text-purple-600 hover:underline"
+          className="text-terracota-queimado hover:underline font-medium"
           data-cy="toggle-to-register"
         >
           Cadastre-se

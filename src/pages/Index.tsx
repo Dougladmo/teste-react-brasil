@@ -34,7 +34,7 @@ const Index = () => {
           <h2 className="text-4xl font-bold text-off-white-envelhecido mb-4">
             Produtos em Destaque
           </h2>
-          <p className="text-off-white-envelhecido/80 text-lg">
+          <p className="text-off-white-envelhecido/90 text-lg">
             Encontre tesouros únicos e produtos especiais no Garimpo
           </p>
         </div>

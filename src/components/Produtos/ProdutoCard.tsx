@@ -57,7 +57,7 @@ export function ProdutoCard({ produto }: ProdutoCardProps) {
   };
 
   return (
-    <div className="bg-off-white-envelhecido/90 backdrop-blur-sm rounded-xl shadow-lg border border-cinza-sujo/30 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-cy="produto-card">
+    <div className="bg-off-white-envelhecido/95 backdrop-blur-sm rounded-xl shadow-lg border border-cinza-sujo/30 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-cy="produto-card">
       <div className="aspect-square overflow-hidden">
         <img
           src={getImagemProduto(produto.categoria, produto.nome)}
@@ -70,7 +70,7 @@ export function ProdutoCard({ produto }: ProdutoCardProps) {
         <h3 className="font-semibold text-lg text-marrom-cafezinho mb-2" data-cy="produto-nome">
           {produto.nome}
         </h3>
-        <p className="text-cinza-sujo text-sm mb-3" data-cy="produto-descricao">
+        <p className="text-marrom-cafezinho/70 text-sm mb-3" data-cy="produto-descricao">
           {produto.descricao}
         </p>
         <div className="flex items-center justify-between">
@@ -79,7 +79,7 @@ export function ProdutoCard({ produto }: ProdutoCardProps) {
           </span>
           <Button
             onClick={() => adicionarItem(produto.id)}
-            className="bg-terracota-queimado hover:bg-terracota-queimado/80 text-off-white-envelhecido"
+            className="bg-terracota-queimado hover:bg-terracota-queimado/80 text-off-white-envelhecido font-medium"
             data-cy="adicionar-carrinho"
           >
             <ShoppingCart className="w-4 h-4 mr-2" />

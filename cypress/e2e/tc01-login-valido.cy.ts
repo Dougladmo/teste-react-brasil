@@ -13,9 +13,14 @@ describe('TC01 - Login Válido (Automatizado)', () => {
     
     // Clicar no botão de login
     cy.get('[data-cy="login-submit"]').click()
+<<<<<<< Updated upstream
       // Verificar redirecionamento para página de produtos
     cy.get('[data-cy="lista-produtos"]').should('be.visible')
     cy.get('[data-cy="user-name"]').should('contain', 'teste') // Nome do usuário
+=======
+    
+    cy.get('[data-cy="user-name"]').should('contain', 'teste@teste.com')
+>>>>>>> Stashed changes
     
     // Verificar se o header está visível
     cy.contains('Garimpo').should('be.visible')

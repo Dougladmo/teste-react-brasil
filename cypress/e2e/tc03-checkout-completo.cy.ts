@@ -1,4 +1,3 @@
-
 describe('TC03 - Teste de Checkout Completo (Automatizado)', () => {
   beforeEach(() => {
     // Login

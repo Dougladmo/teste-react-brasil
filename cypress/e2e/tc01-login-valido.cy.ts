@@ -8,15 +8,15 @@ describe('TC01 - Login Válido (Automatizado)', () => {
     cy.get('[data-cy="login-form"]').should('be.visible')
     
     // Preencher credenciais válidas
-    cy.get('[data-cy="login-email"]').type('standard_user@teste.com')
-    cy.get('[data-cy="login-password"]').type('secret_sauce')
+    cy.get('[data-cy="login-email"]').type('teste@teste.com')
+    cy.get('[data-cy="login-password"]').type('123456')
     
     // Clicar no botão de login
     cy.get('[data-cy="login-submit"]').click()
     
     // Verificar redirecionamento para página de produtos
     cy.get('[data-cy="lista-produtos"]').should('be.visible')
-    cy.get('[data-cy="user-name"]').should('contain', 'standard_user@teste.com')
+    cy.get('[data-cy="user-name"]').should('contain', 'teste@teste.com')
     
     // Verificar se o header está visível
     cy.contains('Garimpo').should('be.visible')
@@ -32,5 +32,14 @@ describe('TC01 - Login Válido (Automatizado)', () => {
     
     // Verificar que permanece na tela de login
     cy.get('[data-cy="login-form"]').should('be.visible')
+  })
+  
+  it('Deve realizar login usando comando customizado', () => {
+    // Usando o comando customizado com credenciais padrão
+    cy.login()
+    
+    // Verificar que login foi bem-sucedido
+    cy.get('[data-cy="lista-produtos"]').should('be.visible')
+    cy.get('[data-cy="user-name"]').should('contain', 'teste@teste.com')
   })
 })

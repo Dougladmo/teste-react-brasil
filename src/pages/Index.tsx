@@ -12,7 +12,7 @@ const Index = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-marrom-cafezinho via-cinza-sujo to-bege-po flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-marrom-cafezinho via-cinza-sujo to-bege-po flex items-center justify-center">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-terracota-queimado"></div>
       </div>
     );

@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -19,6 +20,13 @@ export default {
 		},
 		extend: {
 			colors: {
+				// Paleta Urbano Desgastado
+				'verde-milicia': '#5B665E',
+				'azul-denim': '#708090',
+				'amarelo-mostarda': '#D4A017',
+				'laranja-sinalizacao': '#E07A5F',
+				'cinza-concreto': '#8C8C8C',
+				
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

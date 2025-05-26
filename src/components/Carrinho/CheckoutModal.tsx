@@ -30,9 +30,18 @@ export function CheckoutModal({ isOpen, onClose, total, itens }: CheckoutModalPr
     validade: '',
     cvv: '',
   });
+  const [pixPago, setPixPago] = useState(false);
   const [loading, setLoading] = useState(false);
   const { limparCarrinho } = useCarrinho();
   const { user } = useAuth();
+
+  const handlePixPaymentConfirmed = () => {
+    setPixPago(true);
+    toast({
+      title: "PIX Confirmado",
+      description: "Pagamento PIX simulado com sucesso!",
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,7 +86,7 @@ export function CheckoutModal({ isOpen, onClose, total, itens }: CheckoutModalPr
   const isFormValid = () => {
     const enderecoValido = endereco.rua && endereco.numero && endereco.bairro && endereco.cidade && endereco.cep;
     const pagamentoValido = formaPagamento && (
-      formaPagamento === 'pix' ||
+      (formaPagamento === 'pix' && pixPago) ||
       (formaPagamento === 'cartao' && dadosCartao.numero && dadosCartao.nome && dadosCartao.validade && dadosCartao.cvv)
     );
     return enderecoValido && pagamentoValido;
@@ -106,6 +115,7 @@ export function CheckoutModal({ isOpen, onClose, total, itens }: CheckoutModalPr
             dadosCartao={dadosCartao}
             onDadosCartaoChange={setDadosCartao}
             total={total}
+            onPixPaymentConfirmed={handlePixPaymentConfirmed}
           />
 
           <div className="border-t border-cinza-sujo/20 pt-4 mt-4">

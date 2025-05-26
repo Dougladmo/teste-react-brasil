@@ -18,6 +18,7 @@ interface FormaPagamentoSectionProps {
   dadosCartao: DadosCartaoData;
   onDadosCartaoChange: (dados: DadosCartaoData) => void;
   total: number;
+  onPixPaymentConfirmed?: () => void;
 }
 
 export function FormaPagamentoSection({
@@ -25,7 +26,8 @@ export function FormaPagamentoSection({
   onFormaPagamentoChange,
   dadosCartao,
   onDadosCartaoChange,
-  total
+  total,
+  onPixPaymentConfirmed
 }: FormaPagamentoSectionProps) {
   return (
     <div className="space-y-4">
@@ -58,6 +60,7 @@ export function FormaPagamentoSection({
       <PixPaymentDisplay
         total={total}
         isVisible={formaPagamento === 'pix'}
+        onPixPaymentConfirmed={onPixPaymentConfirmed}
       />
     </div>
   );

@@ -1,13 +1,15 @@
 
-import { QrCode } from 'lucide-react';
+import { QrCode, Check } from 'lucide-react';
 import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
 interface PixPaymentDisplayProps {
   total: number;
   isVisible: boolean;
+  onPixPaymentConfirmed?: () => void;
 }
 
-export function PixPaymentDisplay({ total, isVisible }: PixPaymentDisplayProps) {
+export function PixPaymentDisplay({ total, isVisible, onPixPaymentConfirmed }: PixPaymentDisplayProps) {
   const formatarPreco = (preco: number) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
@@ -47,6 +49,16 @@ export function PixPaymentDisplay({ total, isVisible }: PixPaymentDisplayProps) 
             Código de demonstração para testes
           </p>
         </div>
+
+        <Button
+          type="button"
+          onClick={onPixPaymentConfirmed}
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-medium flex items-center gap-2"
+          data-cy="pix-ja-paguei"
+        >
+          <Check className="w-4 h-4" />
+          Já Paguei - Confirmar PIX
+        </Button>
       </div>
     </div>
   );

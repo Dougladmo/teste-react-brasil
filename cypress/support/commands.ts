@@ -1,34 +1,24 @@
+/// <reference types="cypress" />
 
-// Comando para login
-Cypress.Commands.add('login', (email: string, password: string) => {
-  cy.visit('/')
-  cy.get('[data-cy="login-email"]').type(email)
-  cy.get('[data-cy="login-password"]').type(password)
-  cy.get('[data-cy="login-submit"]').click()
-})
-
-// Comando para logout
-Cypress.Commands.add('logout', () => {
-  cy.get('[data-cy="logout-button"]').click()
-})
-
-// Comando para adicionar produto ao carrinho
-Cypress.Commands.add('adicionarProdutoAoCarrinho', () => {
-  cy.get('[data-cy="adicionar-carrinho"]').first().click()
-})
-
-// Comando para abrir carrinho
-Cypress.Commands.add('abrirCarrinho', () => {
-  cy.get('[data-cy="abrir-carrinho"]').click()
-})
-
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      login(email: string, password: string): Chainable<void>
-      logout(): Chainable<void>
-      adicionarProdutoAoCarrinho(): Chainable<void>
-      abrirCarrinho(): Chainable<void>
-    }
+// eslint-disable-next-line @typescript-eslint/no-namespace
+declare namespace Cypress {
+  interface Chainable {
+    /**
+     * Custom command to simulate tab key press
+     * @example cy.get('input').tab()
+     */
+    tab(options?: Partial<Cypress.TypeOptions>): Chainable<JQuery<HTMLElement>>;
   }
 }
+
+Cypress.Commands.add('tab', 
+  { prevSubject: 'element' },
+  (subject, options) => {
+    cy.wrap(subject, options).trigger('keydown', {
+      keyCode: 9,
+      which: 9,
+      force: true
+    });
+    return cy.wrap(subject, options);
+  }
+);

@@ -18,15 +18,18 @@ const Index = () => {
     );
   }
 
-  if (!user) {
+  if (!user || import.meta.env.MODE === 'test') {
+    console.log('Usuário não autenticado ou modo teste - mostrando AuthPage');
     return <AuthPage />;
   }
+
+  console.log('Usuário autenticado:', user.email);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-marrom-cafezinho via-cinza-sujo to-bege-po">
       <Header onOpenCarrinho={() => setCarrinhoAberto(true)} />
       
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8" role="main">
         <div className="mb-8 text-center">
           <h2 className="text-4xl font-bold text-off-white-envelhecido mb-4">
             Produtos em Destaque

@@ -26,10 +26,11 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
         title: "Sucesso",
         description: "Login realizado com sucesso!",
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Erro ao fazer login";
       toast({
         title: "Erro",
-        description: error.message || "Erro ao fazer login",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -38,7 +39,7 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4" data-cy="login-form">
+    <form onSubmit={handleSubmit} className="space-y-4" data-cy="login-form" data-testid="login-form">
       <div>
         <Label htmlFor="email">Email</Label>
         <Input

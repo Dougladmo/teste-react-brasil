@@ -26,7 +26,7 @@ const Index = () => {
   console.log('Usuário autenticado:', user.email);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-marrom-cafezinho to-bege-po">
+    <div className="min-h-screen bg-gradient-to-br from-marrom-cafezinho via-cinza-sujo to-bege-po">
       <Header onOpenCarrinho={() => setCarrinhoAberto(true)} />
       
       <main className="container mx-auto px-4 py-8" role="main">
